@@ -7,18 +7,10 @@ const connectDB = require('./config/db.js');
 const taskRoutes = require('./routes/taskRoutes');
 
 // Middleware CORS
-app.use(cors(
-  {
-    origin: 'http://localhost:5173',
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    credentials: true, // Allow cookies to be sent
-  }
-));
-
 app.use(cors({
-  origin: 'https://teroga2007.github.io',
+  origin: ['http://localhost:5173', 'https://teroga2007.github.io'],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  credentials: true, // Allow cookies to be sent
+  credentials: true,
 }));
 
 // Middleware parse json
