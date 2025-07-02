@@ -11,7 +11,7 @@
     "preview": "vite preview",
     "postinstall": "flowbite-react patch",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist -r https://$GH_TOKEN@github.com/teroga2007/Tasks-MERN.git"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.11",
