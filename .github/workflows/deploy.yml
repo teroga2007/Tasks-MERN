@@ -23,19 +23,19 @@ jobs:
         run: npm install
 
       - name: Run linter (if exists)
-        working-directory: client/taskManager
+        working-directory: client/tasksManager
         run: npm run lint || echo "No linter defined"
 
       - name: Run tests (if exists)
-        working-directory: client/taskManager
+        working-directory: client/tasksManager
         run: npm test || echo "No tests defined"
 
       - name: Build project
-        working-directory: client/taskManager
+        working-directory: client/tasksManager
         run: npm run build
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: client/taskManager/dist
+          publish_dir: client/tasksManager/dist
