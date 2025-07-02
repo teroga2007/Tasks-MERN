@@ -72,7 +72,7 @@ export default function TasksTable() {
 
     try {
       await Promise.all(
-        selectedTasks.map(id => axios.delete(`http://localhost:3000/api/tasks/${id}`))
+        selectedTasks.map(id => axios.delete(`https://tasks-mern-l4uf.onrender.com/api/tasks/${id}`))
       );
       setTasks(prev => prev.filter(task => !selectedTasks.includes(task._id)));
       setSelectedTasks([]);

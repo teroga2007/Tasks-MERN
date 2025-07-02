@@ -15,6 +15,10 @@ app.use(cors(
   }
 ));
 
+app.use(cors({
+  origin: 'https://teroga2007.github.io',
+}));
+
 // Middleware parse json
 app.use(express.json());
 
