@@ -19,7 +19,7 @@ jobs:
           node-version: 18
 
       - name: Install dependencies
-        working-directory: client/taskManager
+        working-directory: client/tasksManager
         run: npm install
 
       - name: Run linter (if exists)
