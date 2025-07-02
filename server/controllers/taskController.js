@@ -11,11 +11,11 @@ const getTasks = async (req, res) => {
 
 const createTask = async (req, res) => {
   try {
-    const { title, description, priority, dueDate } = req.body;
+    const { title, description, priority, dueDate, completed } = req.body;
     if (!title || !description || !priority || !dueDate) {
       return res.status(400).json({ error: 'All fields are required' });
     }
-    const task = new Task({ title, description, priority, dueDate });
+    const task = new Task({ title, description, priority, dueDate, completed });
     await task.save();
     if (!task) {
       return res.status(500).json({ error: 'Failed to create task' });
@@ -41,9 +41,9 @@ const removeTask = async (req, res) => {
 
 const updateTask = async (req, res) => {
   try {
-    const { title, description, priority, dueDate } = req.body;
+    const { title, description, priority, dueDate, completed } = req.body;
     const updatedTask = await Task.findByIdAndUpdate(req.params.id,
-      { title, description, priority, dueDate },
+      { title, description, priority, dueDate, completed },
       { new: true });
 
     if (!updatedTask) return res.status(404).json({ error: 'Task not found' });

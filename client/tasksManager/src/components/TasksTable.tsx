@@ -127,59 +127,61 @@ export default function TasksTable() {
             </TableHead>
 
             <TableBody className="divide-y">
-              {tasks.map((task: Task) => (
-                <TableRow key={task._id} className="bg-gray-800 hover:bg-gray-700 text-gray-100 border-b border-gray-700">
-                  <TableCell className="p-4">
-                    <Checkbox
-                      className="border border-solid border-white dark:border-white"
-                      checked={selectedTasks.includes(task._id)}
-                      onChange={() => toggleSelectTask(task._id)}
-                    />
-                  </TableCell>
+              {[...tasks]
+                .sort((a, b) => Number(a.completed) - Number(b.completed))
+                .map((task: Task) => (
+                  <TableRow key={task._id} className="bg-gray-800 hover:bg-gray-700 text-gray-100 border-b border-gray-700">
+                    <TableCell className="p-4">
+                      <Checkbox
+                        className="border border-solid border-white dark:border-white"
+                        checked={selectedTasks.includes(task._id)}
+                        onChange={() => toggleSelectTask(task._id)}
+                      />
+                    </TableCell>
 
-                  <TableCell className="whitespace-nowrap font-medium">
-                    {task.title}
-                  </TableCell>
+                    <TableCell className={`whitespace-nowrap font-medium ${task.completed ? 'line-through text-gray-400' : ''}`}>
+                      {task.title}
+                    </TableCell>
 
-                  <TableCell className="max-w-xs whitespace-pre-line text-sm text-gray-300 break-words">
-                    {task.description}
-                  </TableCell>
+                    <TableCell className={`max-w-xs whitespace-pre-line text-sm break-words ${task.completed ? 'line-through text-gray-400' : 'text-gray-300'}`}>
+                      {task.description}
+                    </TableCell>
 
-                  <TableCell className={`capitalize font-semibold ${task.priority === 'low' ? 'text-green-400' :
-                    task.priority === 'medium' ? 'text-yellow-300' :
-                      'text-red-400'
-                    }`}>
-                    {task.priority}
-                  </TableCell>
+                    <TableCell className={`capitalize font-semibold ${task.priority === 'low' ? 'text-green-400' :
+                      task.priority === 'medium' ? 'text-yellow-300' :
+                        'text-red-400'
+                      }`}>
+                      {task.priority}
+                    </TableCell>
 
 
-                  <TableCell>
-                    {
-                      moment(task.dueDate).isBefore(moment())
-                        ? <span className="text-red-400 font-semibold">Overdue</span>
-                        : <span className="text-gray-300">{moment(task.dueDate).format('DD-MM-YYYY')}</span>
-                    }
-                  </TableCell>
+                    <TableCell>
+                      {
+                        moment(task.dueDate).isBefore(moment())
+                          ? <span className="text-red-400 font-semibold">Overdue</span>
+                          : <span className="text-gray-300">{moment(task.dueDate).format('DD-MM-YYYY')}</span>
+                      }
+                    </TableCell>
 
-                  <TableCell>
-                    <div
-                      className="flex items-center gap-2 text-blue-400 hover:text-blue-300 hover:underline cursor-pointer"
-                      onClick={() => navigate(`/tasks/${task._id}`)}>
-                      <CiEdit />
-                      <span>Edit</span>
-                    </div>
-                  </TableCell>
+                    <TableCell>
+                      <div
+                        className="flex items-center gap-2 text-blue-400 hover:text-blue-300 hover:underline cursor-pointer"
+                        onClick={() => navigate(`/tasks/${task._id}`)}>
+                        <CiEdit />
+                        <span>Edit</span>
+                      </div>
+                    </TableCell>
 
-                  <TableCell>
-                    <div
-                      className="flex items-center gap-2 text-red-400 hover:text-red-300 hover:underline cursor-pointer"
-                      onClick={() => deleteTask(task._id)}>
-                      <MdDelete />
-                      <span>Remove</span>
-                    </div>
-                  </TableCell>
-                </TableRow>
-              ))}
+                    <TableCell>
+                      <div
+                        className="flex items-center gap-2 text-red-400 hover:text-red-300 hover:underline cursor-pointer"
+                        onClick={() => deleteTask(task._id)}>
+                        <MdDelete />
+                        <span>Remove</span>
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                ))}
 
             </TableBody>
           </Table>
