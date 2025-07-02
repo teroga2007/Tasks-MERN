@@ -17,6 +17,8 @@ app.use(cors(
 
 app.use(cors({
   origin: 'https://teroga2007.github.io',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true, // Allow cookies to be sent
 }));
 
 // Middleware parse json
