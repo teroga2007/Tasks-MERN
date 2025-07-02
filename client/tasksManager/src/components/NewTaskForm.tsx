@@ -21,7 +21,7 @@ export default function NewTaskForm() {
     }
 
     try {
-      await axios.post("http://localhost:3000/api/tasks", {
+      await axios.post("https://tasks-mern-l4uf.onrender.com/api/tasks", {
         title,
         description,
         priority: priority.toLowerCase(),

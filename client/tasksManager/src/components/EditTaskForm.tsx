@@ -16,7 +16,7 @@ export default function EditTaskForm() {
   const [isCompleted, setIsCompleted] = useState(false);
 
   useEffect(() => {
-    axios.get(`http://localhost:3000/api/tasks/${id}`).then(({ data }) => {
+    axios.get(`https://tasks-mern-l4uf.onrender.com/api/tasks/${id}`).then(({ data }) => {
       setTitle(data.title);
       setDescription(data.description);
       setPriority(data.priority);
@@ -29,7 +29,7 @@ export default function EditTaskForm() {
     e.preventDefault();
 
     try {
-      await axios.put(`http://localhost:3000/api/tasks/${id}`, {
+      await axios.put(`https://tasks-mern-l4uf.onrender.com/api/tasks/${id}`, {
         title,
         description,
         priority,

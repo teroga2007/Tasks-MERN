@@ -25,7 +25,7 @@ export default function TasksTable() {
   useEffect(() => {
     const getTasks = async () => {
       try {
-        axios.get('http://localhost:3000/api/tasks').then((response) => {
+        axios.get('https://tasks-mern-l4uf.onrender.com/api/tasks').then((response) => {
           setTasks(response.data);
           setIsLoading(false);
         })
@@ -43,7 +43,7 @@ export default function TasksTable() {
     if (!confirmed) return;
 
     try {
-      await axios.delete(`http://localhost:3000/api/tasks/${id}`);
+      await axios.delete(`https://tasks-mern-l4uf.onrender.com/api/tasks/${id}`);
       setTasks((prev) => prev.filter((task: Task) => task._id !== id));
       toast.success("Task deleted");
     } catch (error) {
