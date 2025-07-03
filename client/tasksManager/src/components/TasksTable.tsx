@@ -83,6 +83,30 @@ export default function TasksTable() {
     }
   };
 
+  const completeSelectedTasks = async () => {
+    try {
+      await Promise.all(
+        selectedTasks.map(id =>
+          axios.put(`https://tasks-mern-l4uf.onrender.com/api/tasks/${id}`, {
+            completed: true,
+          })
+        )
+      );
+
+      setTasks(prev =>
+        prev.map(task =>
+          selectedTasks.includes(task._id) ? { ...task, completed: true } : task
+        )
+      );
+
+      setSelectedTasks([]);
+      toast.success("Selected tasks marked as completed");
+    } catch (error) {
+      console.error(error);
+      toast.error("Failed to complete selected tasks");
+    }
+  };
+
 
   return (
     isLoading ? <Spinner aria-label="Content is loading" /> :
@@ -93,6 +117,7 @@ export default function TasksTable() {
             <SelectedTasksBar
               selectedTasks={tasks.filter(task => selectedTasks.includes(task._id))}
               deleteSelectedTasks={deleteSelectedTasks}
+              completeSelectedTasks={completeSelectedTasks}
             />
           )}
           <Table hoverable>
